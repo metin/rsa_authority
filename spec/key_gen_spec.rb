@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe RSAAuthority::KeyGen do
-  let(:test_key_name) { 'example_key' }
+  let(:test_key_name) { 'spec/support/gen_key' }
   let(:public_key) { "#{test_key_name}.pub" }
   let(:private_key) { "#{test_key_name}.pem" }
 
