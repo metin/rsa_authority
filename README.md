@@ -32,7 +32,8 @@ Then send your public key to the server you want to be allowed to send the reque
 
 Sign the request before executing it with client side private key
 ```ruby
-RSAAuthority::Signer.new(request, private_key)
+signer = RSAAuthority::Signer.new(request, private_key)
+signer.sign
 ```
 This will add a header to the HTTP request. This is signed version of the request.
 
@@ -40,7 +41,7 @@ This will add a header to the HTTP request. This is signed version of the reques
 ### Server side
 Find private key for the cient. Client should have a client id, and server should have that client id associated with public key for the client
 
-```
+```ruby
 auth = RSAAuthority::Authorizer.new(request, public_key)
 auth.authentic?
 ```
