@@ -1,6 +1,6 @@
-# RsaAuthority
+# RSAAuthority
 
-TODO: Write a gem description
+Signing and authorization of HTTP requests with RSA keys
 
 ## Installation
 
@@ -17,8 +17,35 @@ Or install it yourself as:
     $ gem install rsa_authority
 
 ## Usage
+Generate your RSA key pairs. You can use utility provided in the gem
+```
+rake rsa_authority:key_gen["example"]
+```
+This will generate both public and private keys
+`expamle.pem`
+`example.pub`
 
-TODO: Write usage instructions here
+Then send your public key to the server you want to be allowed to send the requests.
+
+
+### Client side
+
+Sign the request before executing it with client side private key
+```ruby
+RSAAuthority::Signer.new(request, private_key)
+```
+This will add a header to the HTTP request. This is signed version of the request.
+
+
+### Server side
+Find private key for the cient. Client should have a client id, and server should have that client id associated with public key for the client
+
+```
+auth = RSAAuthority::Authorizer.new(request, public_key)
+auth.authentic?
+```
+
+
 
 ## Contributing
 
