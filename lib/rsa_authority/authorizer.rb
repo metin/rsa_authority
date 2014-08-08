@@ -5,7 +5,7 @@ module RSAAuthority
 
     def initialize(request, public_key)
       @public_key = public_key
-      @request = request
+      @request = build_request(request)
     end
 
     def authentic?
@@ -18,11 +18,16 @@ module RSAAuthority
     end
 
     def data
-      request.request_method.downcase + request.env["REQUEST_URI"]
+      @request.data
     end
 
     def signature
-      request.headers['X-Signature']
+      @request.signature
     end
+
+    def build_request(request)
+      Requests::ActionDispatch.new(request)
+    end
+
   end
 end

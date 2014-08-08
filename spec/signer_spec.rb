@@ -5,7 +5,6 @@ describe RSAAuthority::Signer do
   let(:private_key) { "#{test_key_name}.pem" }
   let(:request) { double 'request', options: { headers:{}, method: 'GET' }, url: 'http://example.dev/?a=1&b=2' }
 
-  # generate keys
   let(:signer) { RSAAuthority::Signer.new(request, private_key) }
 
   it { expect(signer.data).to eq("gethttp://example.dev/?a=1&b=2") }

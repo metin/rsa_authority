@@ -5,11 +5,11 @@ module RSAAuthority
 
     def initialize(request, private_key)
       @private_key = private_key
-      @request = request
+      @request = build_request(request)
     end
 
     def sign
-      request.options[:headers]['X-Signature'] = signature
+      @request.sign signature
     end
 
     def signature
@@ -18,7 +18,11 @@ module RSAAuthority
     end
 
     def data
-      request.options[:method].to_s.downcase + request.url
+      @request.data
+    end
+
+    def build_request(request)
+      Requests::Typhoeus.new(request)
     end
   end
 end
