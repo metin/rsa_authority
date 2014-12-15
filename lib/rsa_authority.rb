@@ -11,5 +11,5 @@ require "rsa_authority/requests/typhoeus"
 require "rsa_authority/requests/action_dispatch"
 
 module RSAAuthority
-  # Your code goes here...
+  
 end
